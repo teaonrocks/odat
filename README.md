@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Poverty Simulation App
 
-## Getting Started
+## Fostering Empathy Through Interactive Experience
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-Black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-black?style=for-the-badge&logo=github&logoColor=white)](https://ui.shadcn.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<!-- ---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Live Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[Link to your deployed Vercel app here] (e.g., `https://poverty-simulation-app.vercel.app/`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+--- -->
 
-## Learn More
+## ✨ Project Overview
 
-To learn more about Next.js, take a look at the following resources:
+The **Poverty Simulation App** is a powerful educational tool designed to foster empathy and understanding for the challenges faced by low-income single parents. Inspired by traditional spreadsheet-based simulations, this web application transforms a static exercise into a dynamic, real-time, multi-participant experience akin to Kahoot.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Participants embark on a 14-day journey, making critical daily choices that impact their financial balance and reveal the complex, interconnected struggles of poverty. The host controls the pace, presenting scenarios, while participants interact on their own devices.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This app aims to bridge the "empathy gap" by providing a tangible, impactful experience that drives meaningful reflection and discussion.
 
-## Deploy on Vercel
+## 🎯 Key Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Real-Time Engagement:** Utilizes Google Firebase (Firestore) for instant synchronization between host and all participants.
+- **Kahoot-Style Interaction:** Intuitive interface for hosts to control scenarios and participants to make choices on their devices.
+- **Individualized Tracking:** Each participant maintains their own balance and choice history, seeing immediate consequences.
+- **Comprehensive Scenarios:** 14 distinct daily scenarios covering critical areas like housing, transportation, healthcare, childcare, food, and social pressures.
+- **Responsive Design:** Fully accessible and optimized for desktop, tablet, and mobile devices.
+- **Scalable & Cost-Effective:** Built on a serverless architecture (Firebase & Vercel) allowing for hundreds of concurrent users at virtually no running cost.
+- **Data Management:** Hosts can securely and permanently delete all room and participant data after a session is complete.
+- **Built with TypeScript:** Enhances code quality, readability, and maintainability.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/) & [Tailwind CSS](https://tailwindcss.com/)
+- **Real-time Database:** [Google Firebase (Firestore)](https://firebase.google.com/docs/firestore)
+- **Deployment:** [Vercel](https://vercel.com/)
+- **Utilities:** `uuid` for unique IDs, `sonner` for beautiful toasts.

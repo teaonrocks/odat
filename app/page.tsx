@@ -1,103 +1,132 @@
-import Image from "next/image";
+"use client";
+import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardAction,
+	CardContent,
+	CardFooter,
+	CardDescription,
+	CardTitle,
+	CardHeader,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { useState, FormEvent } from "react";
+import { joinRoom } from "@/utils/roomUtils";
+import { createRoom } from "@/utils/roomUtils";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function HomePage() {
+	const [roomId, setRoomId] = useState<string>("");
+	const [name, setName] = useState<string>("");
+	const [loading, setLoading] = useState<boolean>(false);
+	const [error, setError] = useState<string>("");
+	const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	const handleJoin = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+		e.preventDefault();
+		if (!roomId.trim() || !name.trim()) {
+			setError("Please fill in all fields");
+			return;
+		}
+
+		setLoading(true);
+		setError("");
+
+		try {
+			const participantId = await joinRoom(roomId.toUpperCase(), name);
+			router.push(
+				`/room/${roomId.toUpperCase()}?role=participant&id=${participantId}`
+			);
+		} catch (error) {
+			console.error("Error joining room:", error);
+			setError("Could not join room. Check the room code and try again.");
+			setLoading(false);
+		}
+	};
+	return (
+		<div className="min-h-[90vh] flex items-center justify-center p-4">
+			<Card>
+				<CardHeader className="">
+					<div className="flex-col flex justify-center">
+						<CardTitle className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
+							One Day At A Time
+						</CardTitle>
+						<CardDescription>
+							An interactive 14-day journey that helps participants understand
+							the challenges faced by single parents living in poverty.
+						</CardDescription>
+					</div>
+					<CardAction className="hidden md:block">
+						<HostButtton />
+					</CardAction>
+				</CardHeader>
+				<CardContent>
+					<form onSubmit={handleJoin} className="">
+						<div className="flex flex-col gap-6">
+							<div className="grid gap-2">
+								<Label className="">Room Code</Label>
+								<Input
+									type="text"
+									value={roomId}
+									onChange={(e) => setRoomId(e.target.value.toUpperCase())}
+									placeholder="Enter 6-digit code"
+									maxLength={6}
+									className=""
+								/>
+							</div>
+
+							<div className="grid gap-2">
+								<Label className="">Your Name</Label>
+								<Input
+									type="text"
+									value={name}
+									onChange={(e) => setName(e.target.value)}
+									placeholder="Enter your name"
+									className=""
+								/>
+							</div>
+
+							{error && (
+								<div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+									{error}
+								</div>
+							)}
+							<Button type="submit" disabled={loading} className="w-full">
+								{loading ? "Joining..." : "Join Session"}
+							</Button>
+						</div>
+					</form>
+				</CardContent>
+				<CardFooter className="flex flex-col items-center space-y-4">
+					<span className="text-sm text-muted-foreground">
+						This simulation is designed for educational purposes to build
+						empathy and understanding.
+					</span>
+				</CardFooter>
+			</Card>
+		</div>
+	);
 }
+
+const HostButtton = () => {
+	const [loading, setLoading] = useState<boolean>(false);
+	const router = useRouter();
+
+	const handleCreateRoom = async (): Promise<void> => {
+		setLoading(true);
+		try {
+			const roomId = await createRoom();
+			router.push(`/room/${roomId}?role=host`);
+		} catch (error) {
+			console.error("Error creating room:", error);
+			setLoading(false);
+		}
+	};
+
+	return (
+		<Button variant={"link"} onClick={handleCreateRoom} disabled={loading}>
+			{loading ? "Creating Room..." : "Create New Session"}
+		</Button>
+	);
+};
