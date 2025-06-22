@@ -1,4 +1,4 @@
-# Poverty Simulation App
+# One Day At A Time App
 
 ## Fostering Empathy Through Interactive Experience
 
@@ -19,7 +19,7 @@
 
 ## ✨ Project Overview
 
-The **Poverty Simulation App** is a powerful educational tool designed to foster empathy and understanding for the challenges faced by low-income single parents. Inspired by traditional spreadsheet-based simulations, this web application transforms a static exercise into a dynamic, real-time, multi-participant experience akin to Kahoot.
+The **One Day At A Time App** is a powerful educational tool designed to foster empathy and understanding for the challenges faced by low-income single parents. Inspired by traditional spreadsheet-based simulations, this web application transforms a static exercise into a dynamic, real-time, multi-participant experience akin to Kahoot.
 
 Participants embark on a 14-day journey, making critical daily choices that impact their financial balance and reveal the complex, interconnected struggles of poverty. The host controls the pace, presenting scenarios, while participants interact on their own devices.
 
